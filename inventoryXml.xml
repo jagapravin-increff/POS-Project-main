@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <data>
+        <quantity>50</quantity>
+        <category>shoes</category>
+        <brand>nike</brand>
+    </data>
+    <data>
+        <quantity>240</quantity>
+        <category>mobile</category>
+        <brand>xiaomi</brand>
+    </data>
+    <total_quantity>290</total_quantity>
+</items>

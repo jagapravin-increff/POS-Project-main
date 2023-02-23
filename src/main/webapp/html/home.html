@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="snippets.html :: name_head">
+
+</head>
+
+<body>
+
+<nav th:replace="snippets.html :: name_app_navbar"></nav>
+	<link rel="stylesheet" th:href="@{/static/css/home.css}">
+
+
+<div class="container">
+
+<h3>Increff Point Of Sale</h3>
+
+<div class="row">	
+	 <div class="col-3">
+	 	<a th:href="@{/ui/brand}" title="Brand"> <img th:src="@{/static/assets/4.png}"> <p>Brand</p>
+</a>
+	 </div>	
+ <div class="col-3">
+	 	<a th:href="@{/ui/product}" title="Product"> <img th:src="@{/static/assets/3.png}"></i> <p>Products</p></a>
+	    
+	 </div>	
+	 <div class="col-3">
+	 	<a th:href="@{/ui/inventory}" title="Inventory"><img th:src="@{/static/assets/5.png}"> <p>Inventory</p></a>
+	 
+	 </div>	
+	 	 <div class="col-3">
+	 	<a th:href="@{/ui/order}" title="Order"> <img th:src="@{/static/assets/1.png}"> <p>Orders</p></a>
+	 
+	 </div>
+	 <div class="col-3">
+	 	<a th:href="@{/ui/daySalesReport}" title="Report"> <img th:src="@{/static/assets/6.png}"><p>Reports</p></a>
+	 
+	 </div>
+	 <div class="col-3" id="ad">
+		<a th:href="@{/ui/supervisor/admin}" title="Admin"> <img th:src="@{/static/assets/7.png}"><p>Admin</p></a>
+	</div>
+</div> 
+ 
+
+
+
+</div> <!-- Container end-->
+
+<footer th:replace="snippets.html :: name_footer">
+	<script th:src="@{/static/js/app.js}"/></script>
+</footer>
+
+
+</body>	
+<script type="text/javascript">
+	$(document).ready(function(){
+   $(".active").removeClass("active");
+   $("#home-nav").addClass("active");
+});
+</script>
+</html>

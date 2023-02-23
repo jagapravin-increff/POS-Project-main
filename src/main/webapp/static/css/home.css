@@ -1,0 +1,45 @@
+.row
+{
+	width:800px;
+	justify-content:space-around;
+	
+}
+
+.container
+{
+	width:fit-content;
+}
+
+.row div 
+{
+	margin:30px;
+}
+
+.col-2
+{
+	display:flex;
+	flex-direction:column;
+	width:fit-content;
+	text-align:center;
+	padding:0;
+	
+}
+
+
+ p {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+  	margin-top: 7px;
+  	margin-left: 40px;
+}
+
+img{
+	width:80%;
+}
+
+h3{
+	text-align: center;
+	font-size: 40px
+}
+

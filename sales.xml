@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <from>2023-01-23</from>
+    <to>2023-02-22</to>
+    <brand>All</brand>
+    <category>coffee</category>
+    <data>
+        <quantity>12</quantity>
+        <category>coffee</category>
+        <revenue>1376.0</revenue>
+        <brand>ness</brand>
+    </data>
+    <total_quantity>12</total_quantity>
+    <revenue>1376.0</revenue>
+</items>
