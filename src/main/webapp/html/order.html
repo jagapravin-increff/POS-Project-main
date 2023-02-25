@@ -3,247 +3,260 @@
 <html lang="en">
 
 <head th:replace="snippets.html :: name_head">
-	
-<style>
-	input{
-	margin-left: 6px;
-	margin-right: 40px;
-}
-</style>
+
+	<style>
+		input {
+			margin-left: 6px;
+			margin-right: 40px;
+		}
+	</style>
 </head>
 
 <body>
-<nav th:replace="snippets.html :: name_app_navbar"></nav>
+	<nav th:replace="snippets.html :: name_app_navbar"></nav>
 
 
-<div class="container">
-	<div class="row">
-<h3 class="ml-3">Orders</h3>
+	<div class="container">
+		<div class="row">
+			<h3 class="ml-3">Orders</h3>
+		</div>
+
+		<!-- Top row with form-->
+		<div class="row">
+			<div class="col-12">
+				<form class="form-inline" id="order">
+					<button type="button" class="btn btn-primary mr-2" data-toggle="modal" id="add-ord">Add</button>
+					<button type="button" class="btn btn-primary mr-2" id="refresh-data">Refresh</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="row mt-3 ml-1">
+			<div class="col-12" style="padding-left: 0px;padding-left: 0px;">
+				<table class="content-table" id="order-table">
+					<thead>
+						<tr>
+							<th scope="col">Order ID</th>
+							<th scope="col">Created Date</th>
+							<th scope="col" id="action">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+
+
+		<div class="modal fade" tabindex="-1" role="dialog" id="add-inventory-modal" style="overflow: auto">
+			<div class="modal-dialog modal-xl" role="document" style="width:69%">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Add order</h5>
+					</div>
+					<div class="modal-body">
+						<div id="add-div">
+							<form class="form-inline required" id="order-form" style="margin-left: 15px">
+								<div class="form-group">
+									<label for="inputBarcode" class="col-m-2 control-label">Barcode</label>
+									<input type="text" class="form-control" name="barcode" id="inputBarcode"
+										placeholder="Enter Barcode" style="margin-left: 15px;margin-right: 15px">
+								</div>
+								<div class="form-group">
+									<label for="inputQuantity" class="col-m-2 control-label">Quantity</label>
+									<input type="text" class="form-control" name="quantity" id="inputQuantity"
+										placeholder="Enter Quantity" style="margin-left: 15px;margin-right: 15px">
+								</div>
+								<div class="form-group">
+									<label for="inputPrice" class="col-m-2 control-label">Price</label>
+									<input type="text" class="form-control" name="price" id="inputPrice"
+										placeholder="Enter Price" style="margin-left: 15px;margin-right: 15px">
+								</div>
+								<button type="button" class="btn btn-primary" id="add-items">Add</button>
+							</form>
+							<div class="row">
+								&nbsp;
+							</div>
+							<div class="col-12">
+								<table class="content-table" id="item-table">
+									<thead>
+										<tr>
+											<th scope="col">Name</th>
+											<th scope="col">Barcode</th>
+											<th scope="col">Quantity</th>
+											<th scope="col">Price</th>
+											<th scope="col">Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+						<div id="beditdiv">
+							<form class="form-horizontal" id="edit-form">
+								<div class="form-group">
+									<label for="inputBarcode" class="col-sm-2 control-label">Barcode</label>
+									<input type="text" class="form-control" name="barcode" id="inputBarcode"
+										placeholder="Enter Barcode" style="margin-left: 15px;margin-right: 15px">
+								</div>
+								<div class="form-group">
+									<label for="inputQuantity" class="col-sm-2 control-label">Quantity</label>
+									<input type="text" class="form-control" name="quantity" id="inputQuantity"
+										placeholder="Enter Quantity" style="margin-left: 15px;margin-right: 15px">
+								</div>
+								<div class="form-group">
+									<label for="inputPrice" class="col-sm-2 control-label">Price</label>
+									<input type="text" class="form-control" name="price" id="inputPrice"
+										placeholder="Enter Price" style="margin-left: 15px;margin-right: 15px">
+								</div>
+								<input type="hidden" name="id" id="edit-id">
+							</form>
+						</div>
+					</div>
+
+
+					<div class="modal-footer">
+						<div id="addfooter">
+							<button type="button" class="btn btn-primary" id="submit">Submit</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						</div>
+						<div id="editfooter">
+							<button type="button" class="btn btn-primary" id="edit-btn">Update</button>
+							<button type="button" class="btn btn-secondary" id="cancel">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" tabindex="-1" role="dialog" id="view-order-modal" style="overflow: auto">
+			<div class="modal-dialog modal-xl" role="document" style="width:70%">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">View order</h5>
+						<button type="button" class="close" data-dismiss="modal" id="closesign" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="row">
+						&nbsp;
+					</div>
+					<div class="col-12">
+						<table class="content-table" id="order-item-table" style="width:90%">
+							<thead>
+								<tr>
+									<th scope="col">Name</th>
+									<th scope="col">Quantity</th>
+									<th scope="col">Price</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		<!--Edit View Modal-->
+		<div class="modal fade" tabindex="-1" role="dialog" id="view-edit-modal">
+			<div class="modal-dialog modal-xl" role="document" style="width:70%">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Edit Order </h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div id="whole">
+							<form class="form-inline required" id="add-order-form" style="margin-left: 15px">
+								<div class="form-group">
+									<label for="inputBarcode" class="col-2 control-label">Barcode</label>
+									<input type="text" class="form-control" name="barcode" id="inputBarcode"
+										placeholder="Enter Barcode" style="margin-left: 15px;margin-right: 15px">
+								</div>
+								<div class="form-group">
+									<label for="inputQuantity" class="col-2 control-label">Quantity</label>
+									<input type="text" class="form-control" name="quantity" id="inputQuantity"
+										placeholder="Enter Quantity" style="margin-left: 15px;margin-right: 15px">
+								</div>
+								<div class="form-group">
+									<label for="inputPrice" class="col-2 control-label">Price</label>
+									<input type="text" class="form-control" name="price" id="inputPrice"
+										placeholder="Enter Price" style="margin-left: 15px;margin-right: 15px">
+								</div>
+								<button type="button" class="btn btn-primary" id="add-edit-items">Add</button>
+							</form>
+
+							<div class="row">
+
+							</div>
+							<div class="col-12">
+								<table class="content-table" id="edit-item-table" style="width:90%">
+									<thead>
+										<tr>
+											<th scope="col">Name</th>
+											<th scope="col">Barcode</th>
+											<th scope="col">Quantity</th>
+											<th scope="col">Price</th>
+											<th scope="col">Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+						<div id="editdiv">
+							<form class="form-horizontal required" id="edit-view-form">
+								<div class="form-group">
+									<label for="inputBarcode" class="col-sm-2 control-label">Barcode</label>
+									<input type="text" class="form-control" name="barcode" id="editBarcode"
+										placeholder="enter barcode">
+								</div>
+								<div class="form-group">
+									<label for="inputQuantity" class="col-sm-2 control-label">Quantity</label>
+									<input type="text" class="form-control" name="quantity" id="editQuantity"
+										placeholder="enter quantity">
+								</div>
+								<div class="form-group">
+									<label for="inputPrice" class="col-sm-2 control-label">Price</label>
+									<input type="text" class="form-control" name="price" id="editPrice"
+										placeholder="enter price">
+								</div>
+								<input type="hidden" name="id" id="edit-Id">
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div id="aftereditfooter">
+							<button type="button" class="btn btn-primary" id="edit-button">Update</button>
+							<button type="button" class="btn btn-secondary" id="editcancel">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
- <!-- Top row with form-->
- <div class="row">
-	 <div class="col-12">
-			<form class="form-inline" id="order">
-			  <button type="button" class="btn btn-primary mr-2" data-toggle="modal" id="add-ord">Add</button>
-			  <button type="button" class="btn btn-primary mr-2" id="refresh-data">Refresh</button>
-			</form>
-		</div>	
-	</div>
-
-<div class="row mt-3 ml-1">
- <div class="col-12" style="padding-left: 0px;padding-left: 0px;">
-	<table class="content-table" id="order-table">
-	  <thead>
-	    <tr>
-	      <th scope="col">Order ID</th>
-	      <th scope="col">Created Date</th>
-	      <th scope="col" id="action">Actions</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  </tbody>
-	</table>
-
-</div>
-</div>
- 
 
 
-<div class="modal fade" tabindex="-1" role="dialog" id="add-inventory-modal" style="overflow: auto">
-  <div class="modal-dialog modal-xl" role="document" style="width:69%">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Add order</h5>
-      </div>
-      <div class="modal-body">
-      	<div id="add-div">
-			<form class="form-inline required" id="order-form" style="margin-left: 15px">
-			  <div class="form-group">
-			    <label for="inputBarcode" class="col-m-2 control-label">Barcode</label>
-			      <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="Enter Barcode" style="margin-left: 15px;margin-right: 15px">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputQuantity" class="col-m-2 control-label">Quantity</label>
-			      <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="Enter Quantity" style="margin-left: 15px;margin-right: 15px">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputPrice" class="col-m-2 control-label">Price</label>
-			      <input type="text" class="form-control" name="price" id="inputPrice" placeholder="Enter Price" style="margin-left: 15px;margin-right: 15px">
-			  </div>
-			  <button type="button" class="btn btn-primary" id="add-items">Add</button>
-			</form>
-<div class="row">
-	&nbsp;
-</div>
- <div class="col-12">
-	<table class="content-table" id="item-table">
-	  <thead>
-	    <tr>
-	      <th scope="col">Name</th>
-	      <th scope="col">Barcode</th>
-	      <th scope="col">Quantity</th>
-	      <th scope="col">Price</th>
-	      <th scope="col">Actions</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  </tbody>
-	</table>
+	<footer th:replace="snippets.html :: name_footer"></footer>
 
-</div>
-</div>
-     <div id="beditdiv">
-			<form class="form-horizontal" id="edit-form">
-			  <div class="form-group">
-			    <label for="inputBarcode" class="col-sm-2 control-label">Barcode</label>
-			      <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="Enter Barcode" style="margin-left: 15px;margin-right: 15px" >
-			  </div>
-			  <div class="form-group">
-			    <label for="inputQuantity" class="col-sm-2 control-label">Quantity</label>
-			      <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="Enter Quantity" style="margin-left: 15px;margin-right: 15px">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputPrice" class="col-sm-2 control-label">Price</label>
-			      <input type="text" class="form-control" name="price" id="inputPrice" placeholder="Enter Price" style="margin-left: 15px;margin-right: 15px">
-			  </div>
-			  <input type="hidden" name="id" id="edit-id">
-			</form>
-	 </div>	
-</div>
-			 
-	      
-      <div class="modal-footer">
-      	<div id="addfooter">
-      	<button type="button" class="btn btn-primary" id="submit">Submit</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-      </div>
-       <div id="editfooter">
-      	<button type="button" class="btn btn-primary" id="edit-btn">Update</button>
-        <button type="button" class="btn btn-secondary" id="cancel">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<div class="modal fade" tabindex="-1" role="dialog" id="view-order-modal" style="overflow: auto">
-  <div class="modal-dialog modal-xl" role="document" style="width:69%">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">View order</h5>
-        <button type="button" class="close" data-dismiss="modal" id="closesign" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-<div class="row">
-	&nbsp;
-</div>
- <div class="col-12">
-	<table class="content-table" id="order-item-table" style="width:90%">
-	  <thead>
-	    <tr>
-	      <th scope="col">Name</th>
-	      <th scope="col">Quantity</th>
-	      <th scope="col">Price</th>
-	      	    </tr>
-	  </thead>
-	  <tbody>
-	  </tbody>
-	</table>
-
-</div>
-			 
-    </div>
-  </div>
-</div>
+	<script th:src="@{/static/js/order.js}" />
+	</script>
 
 
-<!--Edit View Modal-->
-<div class="modal fade" tabindex="-1" role="dialog" id="view-edit-modal">
-<div class="modal-dialog modal-xl" role="document" style="width:69%">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Edit Order </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-   <div id="whole">
-			<form class="form-inline required" id="add-order-form" style="margin-left: 15px">
-			  <div class="form-group">
-			    <label for="inputBarcode" class="col-m-2 control-label">Barcode</label>
-			      <input type="text" class="form-control" name="barcode" id="inputBarcode" placeholder="Enter Barcode" style="margin-left: 15px;margin-right: 15px">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputQuantity" class="col-m-2 control-label">Quantity</label>
-			      <input type="text" class="form-control" name="quantity" id="inputQuantity" placeholder="Enter Quantity"  style="margin-left: 15px;margin-right: 15px">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputPrice" class="col-m-2 control-label">Price</label>
-			      <input type="text" class="form-control" name="price" id="inputPrice" placeholder="Enter Price" style="margin-left: 15px;margin-right: 15px">
-			  </div>
-			  <button type="button" class="btn btn-primary" id="add-edit-items">Add</button>
-			</form>
-
-<div class="row">
-	&nbsp;
-</div>
- <div class="col-12">
-	<table class="content-table" id="edit-item-table" style="width:90%">
-	  <thead>
-	    <tr>
-	      <th scope="col">Name</th>
-	      <th scope="col">Barcode</th>
-	      <th scope="col">Quantity</th>
-	      <th scope="col">Price</th>
-	      <th scope="col">Actions</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	  </tbody>
-	</table>
-
-</div>
-</div>
-      	<div id="editdiv">
-			<form class="form-horizontal required" id="edit-view-form">
-			  <div class="form-group">
-			    <label for="inputBarcode" class="col-sm-2 control-label">Barcode</label>
-			      <input type="text" class="form-control" name="barcode" id="editBarcode" placeholder="enter barcode">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputQuantity" class="col-sm-2 control-label">Quantity</label>
-			      <input type="text" class="form-control" name="quantity" id="editQuantity" placeholder="enter quantity">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputPrice" class="col-sm-2 control-label">Price</label>
-			      <input type="text" class="form-control" name="price" id="editPrice" placeholder="enter price">
-			  </div>
-			  <input type="hidden" name="id" id="edit-Id">
-			</form>
-	 </div>	
-	</div>
-	     <div class="modal-footer">
-       <div id="aftereditfooter">
-      	<button type="button" class="btn btn-primary" id="edit-button">Update</button>
-        <button type="button" class="btn btn-secondary" id="editcancel">Cancel</button>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
-</div>
-
-
-
-<footer th:replace="snippets.html :: name_footer"></footer>
-
-<script th:src="@{/static/js/order.js}"/></script>
-
-
-</body>	
+</body>
 
 </html>

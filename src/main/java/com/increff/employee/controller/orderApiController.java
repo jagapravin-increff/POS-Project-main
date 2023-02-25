@@ -1,8 +1,8 @@
 package com.increff.employee.controller;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+import com.increff.employee.dto.orderDto;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.increff.employee.model.booForm;
 import com.increff.employee.model.orderForm;
 import com.increff.employee.model.orderitemForm;
-import com.increff.employee.pojo.orderPojo;
 import com.increff.employee.pojo.orderitemPojo;
 import com.increff.employee.service.ApiException;
-import com.increff.employee.service.orderitemService;
-import com.increff.employee.util.DataConversionUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,36 +27,26 @@ public class orderApiController {
 	private Logger logger = Logger.getLogger(orderApiController.class);
 
 	@Autowired
-	private orderitemService service;
+	private orderDto odt;
    
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 	
 	@ApiOperation(value = "Creating a order")
 	@RequestMapping(path = "/api/order/supervisor", method = RequestMethod.POST)
 	public void add(@RequestBody List<orderitemForm> form) throws ApiException {
-		List <orderitemPojo> item=new ArrayList<orderitemPojo>();
-		for(orderitemForm f:form) {
-			item.add(DataConversionUtil.convert(f));
-		}
-		service.AddItems(item);
-		
+		 odt.add(form);
 	}
 	
-	@ApiOperation(value = "adding to existing order")
+	@ApiOperation(value = "Creating a order")
 	@RequestMapping(path = "/api/order/supervisor/{id}", method = RequestMethod.POST)
-	public void AddToExistingOrder(@PathVariable int id,@RequestBody orderitemForm form) throws ApiException {
-			service.AddSingleItem(DataConversionUtil.convert(form),id);
-		    
+	public booForm AddToExistingOrder(@PathVariable int id,@RequestBody orderitemForm form) throws ApiException {
+			return odt.AddToExistingOrder(id,form);
 	}
 
 	@ApiOperation(value = "Gets list of all orders")
 	@RequestMapping(path = "/api/order", method = RequestMethod.GET)
 	public List<orderForm> getAll() throws Exception {
-		List<orderForm> list2 = new ArrayList<orderForm>();
-		for (orderPojo p : service.getAll()) {
-			list2.add(DataConversionUtil.convert(p));
-		}
-		return list2;
+		return odt.getAll();
 	}
 	
 	
@@ -67,7 +54,7 @@ public class orderApiController {
 	@ApiOperation(value = "Gets all order items of an order")
 	@RequestMapping(path = "/api/order/{id}", method = RequestMethod.GET)
 	public List<orderitemPojo> get(@PathVariable int id) throws ApiException {
-		return service.get(id);
+		return odt.get(id);
 	}
 	
 

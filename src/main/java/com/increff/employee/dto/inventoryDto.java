@@ -1,84 +1,80 @@
-// package com.increff.employee.dto;
+package com.increff.employee.dto;
 
-// import java.util.ArrayList;
-// import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.increff.employee.controller.inventoryApiController;
+import com.increff.employee.pojo.productPojo;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.increff.employee.model.inventoryForm;
+import com.increff.employee.pojo.inventoryPojo;
+import com.increff.employee.service.ApiException;
+import com.increff.employee.service.InventoryService;
+import com.increff.employee.service.productService;
+
+@Service
+public class inventoryDto {
+    private Logger logger = Logger.getLogger(inventoryApiController.class);
+    @Autowired
+    private InventoryService service;
+    @Autowired
+    private productService pservice;
+
+    public void add( inventoryForm form) throws ApiException {
+        inventoryPojo p = convert(form);
+        service.add(p);
+    }
+
+    public inventoryForm get( int id) throws ApiException {
+        inventoryPojo p = service.get(id);
+        return convert(p);
+    }
+
+    public List<productPojo> getid() throws Exception {
+        List<productPojo> list = pservice.getAll();
+        return list;
+    }
+
+    public List<inventoryForm> getAll() throws Exception {
+        List<inventoryPojo> list = service.getAll();
+        List<inventoryForm> list2 = new ArrayList<inventoryForm>();
+        for (inventoryPojo p : list) {
+            list2.add(convert(p));
+        }
+        return list2;
+    }
+
+    public void update( int id, inventoryForm f) throws ApiException {
+        inventoryPojo p = convert(f);
+        logger.info(p.getQuantity());
+        logger.info(id);
+        service.update(id, p);
+    }
+
+    private static inventoryForm convert(inventoryPojo p) {
+        inventoryForm d = new inventoryForm();
+        d.setQuantity(p.getQuantity());
+        d.setId(p.getId());
+        d.setBarcode(p.getBarcode());
+        d.setName(p.getName());
+        return d;
+    }
+
+    private  inventoryPojo convert(inventoryForm f) throws ApiException {
+        inventoryPojo pr = new inventoryPojo();
+        logger.info(f.getQuantity());
+        if(f.getQuantity()%1!=0)
+        {
+            throw new ApiException("Quantity cannot have decimal values");
+        }
+        pr.setQuantity((int)f.getQuantity());
+        pr.setBarcode(f.getBarcode());
+        logger.info(pr.getBarcode());
+        return pr;
+    }
 
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
-
-
-// import com.increff.employee.model.inventoryData;
-// import com.increff.employee.model.inventoryForm;
-// import com.increff.employee.model.productData;
-
-// import com.increff.employee.pojo.inventoryPojo;
-// import com.increff.employee.pojo.productPojo;
-// import com.increff.employee.service.ApiException;
-// import com.increff.employee.service.InventoryService;
-
-
-// @Service
-// public class inventoryDto
-// {   
-// 	@Autowired
-// 	private InventoryService service;
-	
-
-	
-// 	public void add(inventoryForm form) throws ApiException
-// 	{
-// 		inventoryPojo p = convert(form);
-// 		service.add(p);
-// 	}
-
-	
-// 	public inventoryData get(int id) throws ApiException
-// 	{
-// 		inventoryPojo p = service.get(id);
-// 		return convert(p);
-// 	}
-	
-
-
-	
-// 	public List<inventoryData> getAll() throws Exception {
-// 		List<inventoryPojo> list = service.getAll();
-// 		List<inventoryData> list2 = new ArrayList<inventoryData>();
-// 		for (inventoryPojo p : list) {
-			
-// 			list2.add(convert(p));
-// 		}
-// 		return list2;
-// 	}
-	
-// 	public void update(int id,inventoryForm f) throws ApiException
-// 	{
-// 		inventoryPojo p = convert(f);
-// 		service.update(id, p);
-// 	}
-
-// 	private static inventoryData convert(inventoryPojo p) {
-// 		inventoryData d = new inventoryData();
-// 		d.setBrand(p.getBrand());
-// 		d.setItem(p.getItem());
-// 		d.setQuantity(p.getQuantity());
-// 		d.setId(p.getId());
-// 		return d;
-// 	}
-
-// 	private static inventoryPojo convert(inventoryForm f) {
-// 		inventoryPojo p = new inventoryPojo();
-// 		p.setBrand(f.getBrand());
-// 		p.setItem(f.getItem());
-// 		p.setQuantity(f.getQuantity());
-// 		return p;
-// 	}
-	
-	
-
-
-// }
-
-	
-	
+}

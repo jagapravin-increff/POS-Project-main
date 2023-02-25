@@ -84,11 +84,9 @@ table.dataTable thead tr {
 
 
 .alert {display:inline-block;
-
 position: absolute;
-top: 0px; 
+top: 0; 
 right: 0;
-left: 0;
 margin: auto;
 text-align: center;}
 
@@ -155,17 +153,26 @@ table.dataTable thead .sorting{
 
 
 .btn-primary {
-  background-color: #567189 !important;
+  background-color: #7B8FA1!important;
   border-color: #ffffff !important;
 }
 .btn-primary:hover,
-.btn-primary:active,
-.btn-primary:visited,
 .btn-primary:focus {
-  background-color: #ffffff !important;
-  border-color: #567189 !important;
-  color: #567189 !important;
+  background-color: #567189 !important;
+  border-color: #ffffff !important;
 }
+
+.btn-secondary {
+  background-color: #7B8FA1!important;
+  border-color: #ffffff !important;
+}
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color:#7B8FA1!important;
+  background-color:#ffffff !important;
+  border-color:#567189!important;
+}
+
 
 .dropdown-menu
 {
@@ -176,4 +183,17 @@ text-align: center !important;
 table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>td.sorting {
   padding-right: 30px;
   padding-left: 30px;
+}
+
+.btn-outline-info
+{
+  background-color: #7B8FA1!important;
+  border-color: #ffffff !important;
+  color:#ffffff !important;
+}
+
+.btn-outline-info:hover,
+.btn-secondary:focus{
+  background-color: #567189 !important;
+  border-color: #ffffff !important;
 }

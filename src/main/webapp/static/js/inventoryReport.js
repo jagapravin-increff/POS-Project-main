@@ -1,97 +1,92 @@
-
-function getReportsUrl(){
-	var baseUrl = $("meta[name=baseUrl]").attr("content")
-	return baseUrl + "/api/reports";
+function getReportsUrl() {
+  let baseUrl = $("meta[name=baseUrl]").attr("content");
+  return baseUrl + "/api/reports";
 }
 
-function invoiceUrl(){
-var baseUrl = $("meta[name=baseUrl]").attr("content")
-    return baseUrl + "/api/inventory-report/pdf";
+function invoiceUrl() {
+  let baseUrl = $("meta[name=baseUrl]").attr("content");
+  return baseUrl + "/api/inventory-report/pdf";
 }
 
-
-function salesReport(){
-    var url = getReportsUrl() + "/inventoryReport";
-    $.ajax({
-        contentType: 'application/json',
-        url: url,
-        type: 'GET',
-         headers: {
-        'Content-Type': 'application/json'
-       },   
-        success: function(data){
-            displaySalesReport(data);
-        },
-        error: handleAjaxError
-    });
+function salesReport() {
+  let url = getReportsUrl() + "/inventoryReport";
+  $.ajax({
+    contentType: "application/json",
+    url: url,
+    type: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    success: function (data) {
+      displaySalesReport(data);
+    },
+    error: handleAjaxError,
+  });
 }
 
 function displaySalesReport(data) {
-    var $tbody = $('#SalesReport-table').find('tbody');
-    $tbody.empty();
-    var totalQuantity = 0;
-    var totalRevenue = 0;
-    console.log(data);
-    for(var i in data){
-        var e = data[i];
-        var row = '<tr>'
-        + '<td>' + e.brand + '</td>'
-        + '<td>' + e.category + '</td>'
-        + '<td>'  + e.count + '</td>'
-        + '</tr>';
-        $tbody.append(row);
-        totalQuantity += e.count;
-    }
-    $('#SalesReport-table').DataTable(
-        {
-            "dom": 'ritp'
-        }
-    );
-    var row = '<tr>'
-            + '<td>' + '' + '</td>'
-            + '<td>' + '' + '</td>'
-            + '<td>'  + '' + '</td>'
-            + '</tr>';
+  let $tbody = $("#SalesReport-table").find("tbody");
+  $tbody.empty();
+  let totalQuantity = 0;
+  let totalRevenue = 0;
+  console.log(data);
+  for (let i in data) {
+    let e = data[i];
+    let row =
+      "<tr>" +
+      "<td>" +
+      e.brand +
+      "</td>" +
+      "<td>" +
+      e.category +
+      "</td>" +
+      "<td>" +
+      e.count +
+      "</td>" +
+      "</tr>";
     $tbody.append(row);
-    row = '<tr>'
-            + '<td>' + 'Total'.bold() + '</td>'
-            + '<td>' + '' + '</td>'
-            + '<td>'  + totalQuantity + '</td>'
-            + '</tr>';
-    $tbody.append(row);
+    totalQuantity += e.count;
+  }
+  $("#SalesReport-table").DataTable({
+    dom: "ritp",
+  });
+    let row =`<tr><td> </td><td> </td><td> </td></tr>`;
+  $tbody.append(row);
+    row =`<tr><td>Total</td><td> </td><td>${totalQuantity}</td></tr>`;
+  $tbody.append(row);
 }
 
 function downloadPdf() {
-    var url = invoiceUrl();
-    $.ajax({
-       url: url,
-       type: 'POST',
-        xhrFields: {
-        responseType: 'blob'
-     },
-       success: function(blob) {
-        var link=document.createElement('a');
-        link.href=window.URL.createObjectURL(blob);
-        link.download="Inventory_Report_" + new Date() + ".pdf";
-        link.click();
-       },
-       error: function(response){
-            handleAjaxError(response);
-       }
-    });
+  let url = invoiceUrl();
+  $.ajax({
+    url: url,
+    type: "POST",
+    xhrFields: {
+      responseType: "blob",
+    },
+    success: function (blob) {
+      let link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = "Inventory_Report_" + new Date() + ".pdf";
+      link.click();
+    },
+    error: function (response) {
+      handleAjaxError(response);
+    },
+  });
 }
 
 function init() {
-    $('#salesReportBtn').click(function(){salesReport(); });
-    $("#download").click(downloadPdf);
+  $("#salesReportBtn").click(function () {
+    salesReport();
+  });
+  $("#download").click(downloadPdf);
 }
-
-
 
 $(document).ready(init);
 $(document).ready(salesReport);
-$(document).ready(function(){
-   $(".active").removeClass("active");
-   $("#rep-nav").addClass("active");
-   $("#i-r").addClass("active");
+$(document).ready(function () {
+  $(".active").removeClass("active");
+  $("#rep-nav").addClass("active");
+  $("#i-r").addClass("active");
 });

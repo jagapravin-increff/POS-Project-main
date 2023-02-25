@@ -56,7 +56,7 @@
 								</fo:table-cell>
 								<fo:table-cell
 									xsl:use-attribute-sets="tableBorder">
-									<fo:block font-weight="bold" font-family="Times New Roman">Price</fo:block>
+									<fo:block font-weight="bold" font-family="Times New Roman">Total Price</fo:block>
 								</fo:table-cell>
 							</fo:table-header>
 							<fo:table-body end-indent="0in">

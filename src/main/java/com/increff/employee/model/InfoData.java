@@ -25,7 +25,7 @@ public class InfoData implements Serializable {
 	}
 
 	public InfoData() {
-		message = "Please Enter Email and Password";
+		message = "Please enter email and password";
 		email = "No email";
 	}
 	

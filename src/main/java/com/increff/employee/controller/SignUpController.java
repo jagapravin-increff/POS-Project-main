@@ -47,7 +47,7 @@ public class SignUpController {
 		logger.info(f.getEmail());
 		UserPojo p = service.get(f.getEmail());
         if (p!=null) {
-			info.setMessage("User Already Present. Redirecting to the login page");
+			info.setMessage("already present. Redirecting to the login page");
     		return new ModelAndView("redirect:/site/login");
         }
 		UserPojo user=convert(f);
