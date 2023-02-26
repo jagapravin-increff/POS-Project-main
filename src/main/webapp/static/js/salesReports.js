@@ -103,16 +103,16 @@ function displaySalesReport(data) {
   console.log(data);
   for (let i in data) {
     let e = data[i];
-    let row =`<tr><td>${e.brand}</td><td>${e.category}</td><td>${e.count}</td><td>${e.revenue}</td></tr>`;
+    let row = `<tr><td>${e.brand}</td><td>${e.category}</td><td>${e.count}</td><td>${e.revenue}</td></tr>`;
     $tbody.append(row);
     totalQuantity += e.count;
     totalRevenue += e.revenue;
   }
   $("#SalesReport-table").DataTable();
 
-  let row =`<tr><td> </td><td> </td><td> </td><td> </td></tr>`;
+  let row = `<tr><td> </td><td> </td><td> </td><td> </td></tr>`;
   $tbody.append(row);
-  row =`<tr><td>Total</td><td> </td><td>${totalQuantity}</td><td>${totalRevenue}</td></tr>`
+  row = `<tr><td>Total</td><td> </td><td>${totalQuantity}</td><td>${totalRevenue}</td></tr>`
   $tbody.append(row);
 }
 
@@ -148,10 +148,10 @@ function downloadPDF() {
       toastr.options.timeOut = 0;
       toastr.error(
         "Brand " +
-          brand +
-          " and Category " +
-          category +
-          " combination does not exist"
+        brand +
+        " and Category " +
+        category +
+        " combination does not exist"
       );
     },
   });

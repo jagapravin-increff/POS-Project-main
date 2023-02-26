@@ -4,12 +4,6 @@
 
 <head th:replace="snippets.html :: name_head">
 
-	<style>
-		input {
-			margin-left: 6px;
-			margin-right: 40px;
-		}
-	</style>
 </head>
 
 <body>
@@ -32,7 +26,7 @@
 		</div>
 
 		<div class="row mt-3 ml-1">
-			<div class="col-12" style="padding-left: 0px;padding-left: 0px;">
+			<div class="col-12 pl-0">
 				<table class="content-table" id="order-table">
 					<thead>
 						<tr>
@@ -50,34 +44,35 @@
 
 
 
-		<div class="modal fade" tabindex="-1" role="dialog" id="add-inventory-modal" style="overflow: auto">
-			<div class="modal-dialog modal-xl" role="document" style="width:69%">
+		<div class="modal fade overflow-auto" tabindex="-1" role="dialog" id="add-inventory-modal">
+			<div class="modal-dialog modal-xl w-70" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Add order</h5>
 					</div>
 					<div class="modal-body">
 						<div id="add-div">
-							<form class="form-inline required" id="order-form" style="margin-left: 15px">
+							<form class="form-inline required ml-1" id="order-form">
+								<div class="row">
 								<div class="form-group">
 									<label for="inputBarcode" class="col-m-2 control-label">Barcode</label>
-									<input type="text" class="form-control" name="barcode" id="inputBarcode"
-										placeholder="Enter Barcode" style="margin-left: 15px;margin-right: 15px">
+									<input type="text" class="form-control mx-1" name="barcode" id="inputBarcode"
+										placeholder="Enter Barcode">
 								</div>
 								<div class="form-group">
 									<label for="inputQuantity" class="col-m-2 control-label">Quantity</label>
-									<input type="text" class="form-control" name="quantity" id="inputQuantity"
-										placeholder="Enter Quantity" style="margin-left: 15px;margin-right: 15px">
+									<input type="text" class="form-control mx-1" name="quantity" id="inputQuantity"
+										placeholder="Enter Quantity">
 								</div>
 								<div class="form-group">
 									<label for="inputPrice" class="col-m-2 control-label">Price</label>
-									<input type="text" class="form-control" name="price" id="inputPrice"
-										placeholder="Enter Price" style="margin-left: 15px;margin-right: 15px">
+									<input type="text" class="form-control mx-1" name="price" id="inputPrice"
+										placeholder="Enter Price">
 								</div>
 								<button type="button" class="btn btn-primary" id="add-items">Add</button>
+							</div>
 							</form>
 							<div class="row">
-								&nbsp;
 							</div>
 							<div class="col-12">
 								<table class="content-table" id="item-table">
@@ -99,21 +94,23 @@
 						<div id="beditdiv">
 							<form class="form-horizontal" id="edit-form">
 								<div class="form-group">
-									<label for="inputBarcode" class="col-sm-2 control-label">Barcode</label>
-									<input type="text" class="form-control" name="barcode" id="inputBarcode"
-										placeholder="Enter Barcode" style="margin-left: 15px;margin-right: 15px">
+									<div class="row">
+									<label for="inputBarcode" class="col-2 control-label">Barcode</label>
+									<input type="text" class="form-control mx-1" name="barcode" id="inputBarcode"
+										placeholder="Enter Barcode">
 								</div>
 								<div class="form-group">
-									<label for="inputQuantity" class="col-sm-2 control-label">Quantity</label>
-									<input type="text" class="form-control" name="quantity" id="inputQuantity"
-										placeholder="Enter Quantity" style="margin-left: 15px;margin-right: 15px">
+									<label for="inputQuantity" class="col-2 control-label">Quantity</label>
+									<input type="text" class="form-control mx-1" name="quantity" id="inputQuantity"
+										placeholder="Enter Quantity">
 								</div>
 								<div class="form-group">
-									<label for="inputPrice" class="col-sm-2 control-label">Price</label>
-									<input type="text" class="form-control" name="price" id="inputPrice"
-										placeholder="Enter Price" style="margin-left: 15px;margin-right: 15px">
+									<label for="inputPrice" class="col-2 control-label">Price</label>
+									<input type="text" class="form-control mx-1" name="price" id="inputPrice"
+										placeholder="Enter Price">
 								</div>
 								<input type="hidden" name="id" id="edit-id">
+							</div>
 							</form>
 						</div>
 					</div>
@@ -133,8 +130,8 @@
 			</div>
 		</div>
 
-		<div class="modal fade" tabindex="-1" role="dialog" id="view-order-modal" style="overflow: auto">
-			<div class="modal-dialog modal-xl" role="document" style="width:70%">
+		<div class="modal fade overflow-auto" tabindex="-1" role="dialog" id="view-order-modal">
+			<div class="modal-dialog modal-xl w-70" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">View order</h5>
@@ -147,7 +144,7 @@
 						&nbsp;
 					</div>
 					<div class="col-12">
-						<table class="content-table" id="order-item-table" style="width:90%">
+						<table class="content-table w-90" id="order-item-table">
 							<thead>
 								<tr>
 									<th scope="col">Name</th>
@@ -168,7 +165,7 @@
 
 		<!--Edit View Modal-->
 		<div class="modal fade" tabindex="-1" role="dialog" id="view-edit-modal">
-			<div class="modal-dialog modal-xl" role="document" style="width:70%">
+			<div class="modal-dialog modal-xl w-70" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">Edit Order </h5>
@@ -178,30 +175,32 @@
 					</div>
 					<div class="modal-body">
 						<div id="whole">
-							<form class="form-inline required" id="add-order-form" style="margin-left: 15px">
+							<form class="form-inline required ml-1" id="add-order-form">
+								<div class="row">
 								<div class="form-group">
-									<label for="inputBarcode" class="col-2 control-label">Barcode</label>
-									<input type="text" class="form-control" name="barcode" id="inputBarcode"
-										placeholder="Enter Barcode" style="margin-left: 15px;margin-right: 15px">
+									<label for="inputBarcode" class="col-3 control-label">Barcode</label>
+									<input type="text" class="form-control mx-1" name="barcode" id="inputBarcode"
+										placeholder="Enter Barcode">
 								</div>
 								<div class="form-group">
-									<label for="inputQuantity" class="col-2 control-label">Quantity</label>
-									<input type="text" class="form-control" name="quantity" id="inputQuantity"
-										placeholder="Enter Quantity" style="margin-left: 15px;margin-right: 15px">
+									<label for="inputQuantity" class="col-3 control-label">Quantity</label>
+									<input type="text" class="form-control mx-1" name="quantity" id="inputQuantity"
+										placeholder="Enter Quantity">
 								</div>
 								<div class="form-group">
-									<label for="inputPrice" class="col-2 control-label">Price</label>
-									<input type="text" class="form-control" name="price" id="inputPrice"
-										placeholder="Enter Price" style="margin-left: 15px;margin-right: 15px">
+									<label for="inputPrice" class="col-3 control-label">Price</label>
+									<input type="text" class="form-control mx-1" name="price" id="inputPrice"
+										placeholder="Enter Price">
 								</div>
 								<button type="button" class="btn btn-primary" id="add-edit-items">Add</button>
+							</div>
 							</form>
 
 							<div class="row">
 
 							</div>
 							<div class="col-12">
-								<table class="content-table" id="edit-item-table" style="width:90%">
+								<table class="content-table w-90" id="edit-item-table" >
 									<thead>
 										<tr>
 											<th scope="col">Name</th>
@@ -220,21 +219,23 @@
 						<div id="editdiv">
 							<form class="form-horizontal required" id="edit-view-form">
 								<div class="form-group">
-									<label for="inputBarcode" class="col-sm-2 control-label">Barcode</label>
+									<div class="row">
+									<label for="inputBarcode" class="col-2 control-label">Barcode</label>
 									<input type="text" class="form-control" name="barcode" id="editBarcode"
 										placeholder="enter barcode">
 								</div>
 								<div class="form-group">
-									<label for="inputQuantity" class="col-sm-2 control-label">Quantity</label>
+									<label for="inputQuantity" class="col-2 control-label">Quantity</label>
 									<input type="text" class="form-control" name="quantity" id="editQuantity"
 										placeholder="enter quantity">
 								</div>
 								<div class="form-group">
-									<label for="inputPrice" class="col-sm-2 control-label">Price</label>
+									<label for="inputPrice" class="col-2 control-label">Price</label>
 									<input type="text" class="form-control" name="price" id="editPrice"
 										placeholder="enter price">
 								</div>
 								<input type="hidden" name="id" id="edit-Id">
+							</div>
 							</form>
 						</div>
 					</div>
@@ -253,7 +254,7 @@
 
 	<footer th:replace="snippets.html :: name_footer"></footer>
 
-	<script th:src="@{/static/js/order.js}" />
+	<script th:src="@{/static/js/order.js}" >
 	</script>
 
 

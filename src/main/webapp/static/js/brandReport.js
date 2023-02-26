@@ -42,15 +42,7 @@ function displaybrandList(data) {
   $tbody.empty();
   for (let i in data) {
     let e = data[i];
-    let row =
-      "<tr>" +
-      "<td>" +
-      e.brand +
-      "</td>" +
-      "<td>" +
-      e.category +
-      "</td>" +
-      "</tr>";
+    let row =`<tr><td>${e.brand}</td><td>${e.category}</td><tr>`;
     $tbody.append(row);
   }
   if (getRole() === "operator") {

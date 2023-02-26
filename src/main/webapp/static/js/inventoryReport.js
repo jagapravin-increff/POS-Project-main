@@ -32,18 +32,7 @@ function displaySalesReport(data) {
   console.log(data);
   for (let i in data) {
     let e = data[i];
-    let row =
-      "<tr>" +
-      "<td>" +
-      e.brand +
-      "</td>" +
-      "<td>" +
-      e.category +
-      "</td>" +
-      "<td>" +
-      e.count +
-      "</td>" +
-      "</tr>";
+    let row =`<tr><td>${e.brand}</td><td>${e.category}</td><td>${e.count}</td></tr>`;
     $tbody.append(row);
     totalQuantity += e.count;
   }

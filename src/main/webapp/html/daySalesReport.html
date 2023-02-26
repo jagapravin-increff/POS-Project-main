@@ -7,7 +7,7 @@
 <body>
 
 <nav th:replace="snippets.html :: name_app_navbar"></nav>
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 <div class="container-fluid">
 
     <h3 class="m-3">Day to Day Sales Report</h3>
@@ -55,11 +55,10 @@
 </div>
 
 <footer th:replace="snippets.html :: name_footer"></footer>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-
-<script th:src="@{/static/js/daySalesreports.js}"/>
+<script th:src="@{/static/js/daySalesreports.js}">
 </script>
 
 </body>

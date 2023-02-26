@@ -151,7 +151,7 @@ function uploadRows() {
       uploadRows();
     },
     error: function (response) {
-      e = 1;
+       upload_error= 1;
       row.error = response.responseText.split(":")[1].split("}")[0];
       console.log(JSON.error);
       errorData.push(row);

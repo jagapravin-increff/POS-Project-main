@@ -26,8 +26,6 @@
 
 
 <div class="row mt-3">
-
- <!-- Table -->
  <div class="col-12">
 	<table class="content-table" id="inventory-table">
 	  <thead>
@@ -89,7 +87,7 @@
 				<div class="row mb-4">
 			   <label for="barcodeedit" class="col-3 col-form-label">Barcode</label>
 				    <div class="col-9">
-                    <input type="text"  class="form-control" name="barcode" id="barcodeedit" style="pointer-events: none;background: #dddddd;">
+                    <input type="text"  class="user-select-none form-control pe-none bg-secondary" name="barcode" id="barcodeedit">
  			    </div>
 			  </div>
 			  <div class="row mb-4">
@@ -147,7 +145,7 @@
 
 <footer th:replace="snippets.html :: name_footer"></footer>
 
-<script th:src="@{/static/js/inventory.js}"/></script>
+<script th:src="@{/static/js/inventory.js}"></script>
 
 
 </body>	

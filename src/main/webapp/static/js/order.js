@@ -64,7 +64,6 @@ function additems() {
       if (exist != null) {
         exist.quantity =
           Number.parseInt(exist.quantity) + Number.parseInt(json.quantity);
-        // exist.price=Number.parseInt(exist.price)+Number.parseInt(json.price*json.quantity);
       } else {
         items.push(json);
       }
@@ -155,9 +154,9 @@ function edititem() {
     },
     success: function (data) {
       const items = JSON.parse(sessionStorage.getItem("itemlist"));
-      let d = JSON.parse(json);
-      d["name"] = data.name;
-      items[parseInt(d.id)] = d;
+      let incoming_data = JSON.parse(json);
+      incoming_data["name"] = data.name;
+      items[parseInt(incoming_data.id)] = incoming_data;
       sessionStorage.setItem("itemlist", JSON.stringify(items));
       $("#edit-modal").modal("toggle");
       showtable();
@@ -312,7 +311,6 @@ function showtable() {
 }
 
 function displayOrder(data) {
-  console.log("k");
   $("#order-table").dataTable().fnClearTable();
   $("#order-table").dataTable().fnDestroy();
   let $tbody = $("#order-table").find("tbody");
@@ -341,13 +339,13 @@ function displayOrder(data) {
         [0, "desc"]
       ],
       columnDefs: [{
-          targets: [1, 2],
-          searchable: false
-        },
-        {
-          visible: false,
-          targets: [2]
-        },
+        targets: [1, 2],
+        searchable: false
+      },
+      {
+        visible: false,
+        targets: [2]
+      },
       ],
       pageLength: 6,
       autoWidth: true,

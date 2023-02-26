@@ -1,3 +1,4 @@
+
 let e = 0;
 function getbrandUrl() {
   let baseUrl = $("meta[name=baseUrl]").attr("content");
@@ -161,7 +162,6 @@ function displaybrandList(data) {
   $tbody.empty();
   for (let i in data) {
     let e = data[i];
-    //let buttonHtml = '<button onclick="deletebrand(' + e.id + ')">delete</button>'
     let buttonHtml =`<button type="button" class="btn-sm btn-outline-info" onclick="displayEditbrand(${e.id})"><i class="fa-solid fa-pen-to-square"></i> Edit</button>`;
       let row=`<tr><td>${e.brand}</td><td>${e.category}</td><td>${buttonHtml}</td></tr>`;
     $tbody.append(row);
